@@ -11,11 +11,6 @@ import SharePost from "../../components/shared/SharePost";
 import FeaturedPosts from "../../components/pages/FeaturedPosts";
 import { Slide } from "../../animation/Slide";
 
-type PageProps = {
-  params: {
-    post: string;
-  };
-};
 
 const fallbackImage =
   "https://raw.githubusercontent.com/diyorbekrustamjonov/xattab.uz/main/public/images/illustrations/blog.png";
