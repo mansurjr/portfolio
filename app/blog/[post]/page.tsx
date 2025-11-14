@@ -21,7 +21,7 @@ const fallbackImage =
   "https://raw.githubusercontent.com/diyorbekrustamjonov/xattab.uz/main/public/images/illustrations/blog.png";
 
 export async function generateMetadata(
-  { params }: PageProps,
+  { params }: any,
   _parent: ResolvingMetadata
 ): Promise<Metadata> {
   const slug = params.post;
@@ -59,7 +59,7 @@ export async function generateMetadata(
   };
 }
 
-export default function PostPage({ params }: PageProps) {
+export default function PostPage({ params }: any) {
   const post = posts.find((p) => p.slug === params.post);
 
   if (!post) return notFound();
