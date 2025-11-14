@@ -4,43 +4,47 @@ import { projects } from "../../data/data";
 import Project from "./project";
 
 type Props = {
-  params: {
-    project: string;
-  };
+  params: { project: string };
 };
 
-const fallbackImage: string =
+const fallbackImage =
   "https://raw.githubusercontent.com/diyorbekrustamjonov/xattab.uz/main/public/images/illustrations/projects.png";
 
+// =====================
+//     METADATA
+// =====================
 export function generateMetadata({ params }: Props): Metadata {
   const slug = params.project;
-  const project = projects.find(project => project.slug === slug);
+  const project = projects.find((p) => p.slug === slug);
 
-  if (!project) {
-    notFound();
-  }
+  if (!project) notFound();
 
   return {
     title: `${project.name} | Project`,
-    metadataBase: new URL(`https://atayev.uz/projects/${project.slug}`),
     description: project.tagline,
+    metadataBase: new URL("https://atayev.uz"),
     openGraph: {
-      images:
-        fallbackImage,
-      url: `https://atayev.uz/projects/${project.slug}`,
       title: project.name,
       description: project.tagline,
+      url: `https://atayev.uz/projects/${project.slug}`,
+      images: fallbackImage,
+      type: "website",
     },
   };
 }
 
-
+// =====================
+//        PAGE
+// =====================
 export default function Page({ params }: Props) {
+  const slug = params.project;
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) notFound();
+
   return (
     <div>
-      <Project params={{
-        project: params.project
-      }} />
+      <Project params={{ project: slug }} />
     </div>
   );
 }
