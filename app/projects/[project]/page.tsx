@@ -4,7 +4,7 @@ import { projects } from "../../data/data";
 import Project from "./project";
 
 type Props = {
-  params: { project: string };
+  params: Promise<{ project: string }>;
 };
 
 const fallbackImage =
@@ -13,10 +13,9 @@ const fallbackImage =
 // =====================
 //     METADATA
 // =====================
-export function generateMetadata({ params }: Props): Metadata {
-  const slug = params.project;
-  const project = projects.find((p) => p.slug === slug);
-
+export async function generateMetadata({ params }: Props) : Promise<Metadata>{
+  const { project: projectSlug } = await params;
+  const project = projects.find((p) => p.slug === projectSlug);
   if (!project) notFound();
 
   return {
@@ -36,15 +35,14 @@ export function generateMetadata({ params }: Props): Metadata {
 // =====================
 //        PAGE
 // =====================
-export default function Page({ params }: Props) {
-  const slug = params.project;
-  const project = projects.find((p) => p.slug === slug);
-
+export default async function ProjectPage({ params }: Props) {
+  const { project: projectSlug } = await params;
+  const project = projects.find((p) => p.slug === projectSlug);
   if (!project) notFound();
 
   return (
     <div>
-      <Project params={{ project: slug }} />
+      <Project params={{ project: (await params).project }} />
     </div>
   );
 }

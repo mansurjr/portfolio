@@ -12,20 +12,18 @@ import FeaturedPosts from "../../components/pages/FeaturedPosts";
 import { Slide } from "../../animation/Slide";
 
 type Props = {
-  params: { post: string };
+  params: Promise<{ post: string }>;
 };
 
 const fallbackImage =
   "https://raw.githubusercontent.com/diyorbekrustamjonov/xattab.uz/main/public/images/illustrations/blog.png";
 
-
 // =====================
 //     METADATA
 // =====================
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { post } = params;
+  const { post } = await params;
   const article = posts.find((p) => p.slug === post);
-
   if (!article) notFound();
 
   return {
@@ -59,14 +57,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-
 // =====================
 //        PAGE
 // =====================
-export default async function PostPage({ params }: Props) {
-  const { post } = params;
+export default async function BlogPostPage({ params }: Props) {
+  const { post } = await params;
   const article = posts.find((p) => p.slug === post);
-
   if (!article) notFound();
 
   return (
@@ -75,8 +71,7 @@ export default async function PostPage({ params }: Props) {
         <Slide className="relative flex items-center gap-x-2 border-b dark:border-zinc-800 border-zinc-200 pb-8">
           <Link
             href="/blog"
-            className="whitespace-nowrap dark:text-zinc-400 text-zinc-400 hover:dark:text-white hover:text-zinc-700 text-sm border-b dark:border-zinc-700 border-zinc-200"
-          >
+            className="whitespace-nowrap dark:text-zinc-400 text-zinc-400 hover:dark:text-white hover:text-zinc-700 text-sm border-b dark:border-zinc-700 border-zinc-200">
             cd ..
           </Link>
           <BiChevronRight />
@@ -129,7 +124,6 @@ export default async function PostPage({ params }: Props) {
               <p className="dark:text-zinc-400 text-zinc-500 text-sm">
                 Written By
               </p>
-
               <address className="flex items-center gap-x-3 mt-4 not-italic">
                 <div className="relative w-12 h-12">
                   <Image
@@ -147,8 +141,7 @@ export default async function PostPage({ params }: Props) {
                     href={article.author.twitterUrl}
                     className="text-blue-500 text-sm"
                     target="_blank"
-                    rel="noreferrer noopener"
-                  >
+                    rel="noreferrer noopener">
                     @{article.author.twitterUrl.split("twitter.com/")[1]}
                   </a>
                 </div>
@@ -156,13 +149,14 @@ export default async function PostPage({ params }: Props) {
             </section>
 
             <section className="border-b dark:border-zinc-800 border-zinc-200 pb-10">
-              <h3 className="text-xl font-semibold tracking-tight mb-4">Tags</h3>
+              <h3 className="text-xl font-semibold tracking-tight mb-4">
+                Tags
+              </h3>
               <ul className="flex flex-wrap items-center gap-2">
                 {article.tags.map((tag, i) => (
                   <li
                     key={i}
-                    className="dark:bg-primary-bg bg-zinc-100 border dark:border-zinc-800 border-zinc-200 rounded-md px-2 py-1 text-sm"
-                  >
+                    className="dark:bg-primary-bg bg-zinc-100 border dark:border-zinc-800 border-zinc-200 rounded-md px-2 py-1 text-sm">
                     {tag}
                   </li>
                 ))}
@@ -179,7 +173,7 @@ export default async function PostPage({ params }: Props) {
               <h3 className="text-xl font-semibold tracking-tight mb-4">
                 Featured
               </h3>
-              <FeaturedPosts params={post} />
+              <FeaturedPosts params={{ post: post }} />
             </section>
           </aside>
         </Slide>
