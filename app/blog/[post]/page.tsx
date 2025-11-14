@@ -11,9 +11,8 @@ import SharePost from "../../components/shared/SharePost";
 import FeaturedPosts from "../../components/pages/FeaturedPosts";
 import { Slide } from "../../animation/Slide";
 
-// IMPORTANT: Next.js 15 uses Promise params!
 type Props = {
-  params: Promise<{ post: string }>;
+  params: { post: string };
 };
 
 const fallbackImage =
@@ -24,7 +23,7 @@ const fallbackImage =
 //     METADATA
 // =====================
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { post } = await params;
+  const { post } = params;
   const article = posts.find((p) => p.slug === post);
 
   if (!article) notFound();
@@ -35,7 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL("https://atayev.uz"),
     keywords: article.tags,
     alternates: {
-      canonical: article.canonicalLink || `https://atayev.uz/blog/${article.slug}`,
+      canonical:
+        article.canonicalLink || `https://atayev.uz/blog/${article.slug}`,
     },
     openGraph: {
       title: article.title,
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 //        PAGE
 // =====================
 export default async function PostPage({ params }: Props) {
-  const { post } = await params;
+  const { post } = params;
   const article = posts.find((p) => p.slug === post);
 
   if (!article) notFound();
@@ -116,14 +116,19 @@ export default async function PostPage({ params }: Props) {
             </div>
 
             <div className="mt-8 dark:text-zinc-400 text-zinc-600 leading-relaxed tracking-tight text-lg">
-              <PortableText value={article.body as any} components={CustomPortableText} />
+              <PortableText
+                value={article.body as any}
+                components={CustomPortableText}
+              />
             </div>
           </div>
 
           {/* RIGHT SIDEBAR */}
           <aside className="flex flex-col gap-y-8 sticky top-2 basis-1/4 py-10 lg:px-6 px-0">
             <section className="border-b dark:border-zinc-800 border-zinc-200 pb-10">
-              <p className="dark:text-zinc-400 text-zinc-500 text-sm">Written By</p>
+              <p className="dark:text-zinc-400 text-zinc-500 text-sm">
+                Written By
+              </p>
 
               <address className="flex items-center gap-x-3 mt-4 not-italic">
                 <div className="relative w-12 h-12">
@@ -171,7 +176,9 @@ export default async function PostPage({ params }: Props) {
             />
 
             <section className="border-b dark:border-zinc-800 border-zinc-200 pb-10">
-              <h3 className="text-xl font-semibold tracking-tight mb-4">Featured</h3>
+              <h3 className="text-xl font-semibold tracking-tight mb-4">
+                Featured
+              </h3>
               <FeaturedPosts params={post} />
             </section>
           </aside>
