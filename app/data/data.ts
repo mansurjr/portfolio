@@ -8,6 +8,7 @@ import {
 } from "react-icons/bi";
 
 import logo from "../../public/logo1.png"
+import gps from "../../public/image.png"
 import movielogo from "@/public/logo-DcNH4XmD.svg"
 import eCommercelogo from "@/public/images/apps/e-commerce/footer_logo-BCHqkLIE.svg"
 import ikafilLogo from "@/public/images/apps/ikafil/image.png"
@@ -38,6 +39,15 @@ export const jobs: JobType[] = [
         description: "Built a CRM system using Django and Django REST Framework, implementing modules for students, teachers, groups, lessons, attendance, and payments with PostgreSQL. Later migrated the platform to NestJS with Prisma, designing scalable REST and GraphQL APIs, implementing role-based access control, and expanding features such as leads management and a student reward system. Collaborated with the team via GitHub, participated in code reviews, and optimized the database design for performance.",
         startDate: "2025-03",
         endDate: "2025-08"
+    },{
+        id: "2",
+        jobTitle: "Frontend Developer",
+        url: "https://uzgps.uz",
+        startDate: "2025-11",
+        logo: gps.src,
+        name: "",
+        description: "As a Frontend Developer, I am working on building a modern, responsive, and high-performance web platform for UZGPS, a GPS tracking and fleet management service. My main responsibility was developing the user interface and client-side functionality that enables businesses to manage and monitor their vehicles in real time.",
+        endDate: ""
     }
 
 ];
