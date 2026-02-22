@@ -46,7 +46,7 @@ export const jobs: JobType[] = [
         startDate: "2025-11",
         logo: gps.src,
         name: "",
-        description: "As a Frontend Developer, I am working on building a modern, responsive, and high-performance web platform for UZGPS, a GPS tracking and fleet management service. My main responsibility was developing the user interface and client-side functionality that enables businesses to manage and monitor their vehicles in real time.",
+        description: "As a Frontend Developer, I am working on building a modern, responsive, and high-performance web platform for UZGPS, a GPS tracking and fleet management service. My main responsibility is developing the user interface and client-side functionality that enables businesses to manage and monitor their vehicles in real time.",
         endDate: ""
     }
 
